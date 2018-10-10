@@ -1,14 +1,3 @@
-# ================================================================
-# BLED112-safe BGScript demo project with multiple DFU reboot methods
-# Imitates a heart-rate sensor as well. Fun!
-# Jeff Rowberg <jeff.rowberg@bluegiga.com>
-# ----------------------------------------------------------------
-#
-# CHANGELOG:
-#   2013-12-04 - Updated for variable name collision requirements
-#   2012-12-06 - Initial release
-#
-# ================================================================
 
 dim connected   # connection status flag (not used much in this demo but whatever)
 
@@ -65,18 +54,7 @@ event connection_disconnected(handle, result)
 end
 
 # catch timer tick, once per second
-event hardware_soft_timer(handle)
-    # increment fake heart rate counter
-    fake_rate = fake_rate + 1
-    
-    # update characteristic value container heart rate byte
-    measure_buf(1:1) = fake_rate
-    
-    # write heart rate measurement characteristic value
-    call attributes_write(c_heart_rate_measurement, 0, 2, measure_buf(0:2))
-    
-    # dongle will notify (push) new value if notifications are enabled at this point
-end
+
 
 # watch for new data from USB CDC
 # NOTE! This function or something similar MUST remain in the BGScript to
